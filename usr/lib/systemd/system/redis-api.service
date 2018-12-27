@@ -1,0 +1,11 @@
+[Unit]
+Description=Run redis rest API in localhost
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /opt/lark/app.py
+
+[Install]
+WantedBy=multi-user.target
+

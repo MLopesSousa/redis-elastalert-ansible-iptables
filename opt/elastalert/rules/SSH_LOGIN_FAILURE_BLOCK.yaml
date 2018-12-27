@@ -1,0 +1,36 @@
+# Elasticsearch info
+es_host: {IP_ELASTICSEARCH}
+es_port: 9200
+
+# Index info
+index: audit-*
+
+#Rule name, must be unique
+name: SSH LOGIN FAILURE BLOCK
+
+# Type of alert.
+type: frequency
+num_events: 5
+timeframe:
+    minutes: 5
+
+query_key: [ip]
+
+# A list of elasticsearch filters used for find events
+# These filters are joined with AND and nested in a filtered query
+# For more info: http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/query-dsl.html
+
+filter:
+- term:
+    tags: "ssh_login_failure"
+
+
+alert:
+ - command
+ - email
+command: ["/opt/scripts/iptables.py"]
+pipe_match_json: true
+
+from_addr: "from@example.com"
+email: "to@example.com"
+

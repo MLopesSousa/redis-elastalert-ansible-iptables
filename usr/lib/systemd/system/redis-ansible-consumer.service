@@ -1,0 +1,11 @@
+[Unit]
+Description=Executes ansible commands when some data is pushed to elastalert:iptables list in localhost redis
+After=multi-user.target
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/python /bin/redis-ansible-consumer.py
+
+[Install]
+WantedBy=multi-user.target
+
